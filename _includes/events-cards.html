@@ -1,0 +1,64 @@
+<div class="text-center  p-5 rounded" 
+     style="background-color:#c8e6c9; color:#2e7d32;" 
+     id="eventsSection">
+
+  <!-- Upcoming Events -->
+  <h1 class="display-5 fw-bold">Upcoming Events</h1>
+  <h4 class="mb-4">Join us for these special events and be part of our community in action.</h4>
+
+  <!-- Dynamic service fallback -->
+  <div class="mb-5">
+    <!--{% assign today_wday = "now" | date: "%u" %} {%- comment -%} 1=Mon … 7=Sun {%- endcomment -%}-->
+    {% assign today_wday = "now" | date: "%u" | plus: 0 %}
+
+    {% if today_wday == "3" %}
+     
+      <p class="lead "><span class="eventh4">Join us Today!</span>📖 Wednesday Bible Study &amp; Kids 4 Truth  — 6:30 PM</p>
+    {% elsif today_wday == "7" %}
+      <p class="lead "><span class="eventh4">Join us Today!</span>✨ Sunday Worship — 9:30 AM · Sunday School — 10:30 AM</p>
+    {% else %}
+      {% if today_wday < 3 %}
+        <h4 class="fw-bold mb-2">Join us Wednesday!</h4>
+        <p class="lead mb-0">📖 Bible Study — 6:30 PM</p>
+      {% elsif today_wday < 7 %}
+        <h4 class="fw-bold mb-2">Join us Sunday!</h4>
+        <p class="lead mb-0">✨ Worship — 9:30 AM · Sunday School — 10:30 AM</p>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  <!-- Upcoming Events Grid -->
+  {% assign now_ts = "now" | date: "%s" %}
+  {% assign future_events = "" | split: "" %}
+  {%- for event in site.data.events -%}
+    {% assign event_ts = event.date | date: "%s" %}
+    {% if event_ts >= now_ts %}
+      {% assign future_events = future_events | push: event %}
+    {% endif %}
+  {%- endfor -%}
+  {% assign upcoming = future_events | sort: "date" %}
+
+  {% if upcoming.size > 0 %}
+    <div class="d-flex flex-wrap justify-content-center gap-4">
+      {% for event in upcoming %}
+        <div class="card shadow-sm" style="max-width: 320px; color:#2e7d32;">
+          {% if event.image %}
+            <img src="{{ event.image | relative_url }}" 
+                 class="card-img-top event-img" 
+                 alt="{{ event.title }}" 
+                 style="object-fit:cover; height:200px;">
+          {% endif %}
+          <div class="card-body text-center">
+            <p class="card-text text-danger">
+              <small>{{ event.date | date: "%B %e, %Y · %l:%M %p" }}</small>
+            </p>
+            <h5 class="card-title">{{ event.title }}</h5>
+            <p class="card-text">{{ event.description }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="mt-4 fw-bold">No special events scheduled right now — but we’d love to see you at our regular services above!</p>
+  {% endif %}
+</div>

@@ -1,0 +1,13 @@
+<div class="nap" itemscope itemtype="https://schema.org/Church">
+  <span class="nap__name" itemprop="name">{{ site.title }}</span><br>
+  <span class="nap__addr" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+    <span itemprop="streetAddress">5270 Chuckey Pike</span>,
+    <span itemprop="addressLocality">Chuckey</span>,
+    <span itemprop="addressRegion">TN</span>
+    <span itemprop="postalCode">37641</span>
+  </span><br>
+  <a class="nap__tel" itemprop="telephone"
+     href="tel:{{ site.phone_e164 | default: site.phone | replace: ' ', '' | replace: '-', '' }}">
+     {{ site.phone }}
+  </a>
+</div>

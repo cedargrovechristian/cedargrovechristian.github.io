@@ -1,0 +1,148 @@
+---
+layout: default
+title: Livestream
+permalink: /livestream/
+youtube:
+  channel_id: "UCdbE14mcESiZoj0wlNXG4bw"
+archive_url: "/archivedSermons/"
+---
+
+<div class="container py-5">
+  <div class="text-center mb-4">
+    <h1 class="display-5 fw-bold">Livestream</h1>
+    <p class="lead mb-0">If we’re live, it will play here. Otherwise please check out our <a href="/archivedSermons/" id="sermonLink">sermons page.</a></p>
+  </div>
+
+  <!-- Player starts hidden; we only reveal it on confirmed live -->
+  <div class="livestream-wrap">
+    <div id="playerContainer" class="livestream-player is-hidden" aria-hidden="true">
+      <div id="yt-live-player"></div>
+    </div>
+  </div>
+
+  <!-- Fallback shown by default -->
+  <div id="notLive" class="text-center mt-4">
+    <p class="lead mb-3">We are not live at the moment.</p>
+    <a class="btn btn-outline-secondary" href="{{ page.archive_url | default: site.archive_url | default: '/sermons/' | relative_url }}">
+      View previous sermons
+    </a>
+  </div>
+</div>
+
+<style>
+.livestream-wrap{display:flex;justify-content:center}
+.livestream-player{width:min(100%,960px);aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.15)}
+.livestream-player iframe{width:100%;height:100%;border:0}
+.is-hidden{display:none !important}
+</style>
+
+<!-- YouTube IFrame API -->
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+/* global YT */
+(function(){
+  var channelId = {{ page.youtube.channel_id | default: site.youtube.channel_id | jsonify }};
+  if (!channelId || typeof channelId !== 'string' || channelId.slice(0,2) !== 'UC') {
+    console.error('Missing/invalid YouTube channel_id.');
+  }
+
+  var POLL_MS = 30000;     // check every 30s
+  var START_GRACE_MS = 4000; // give live a moment to start
+  var player = null, pollTimer = null, startTimer = null, liveShown = false;
+
+  var playerContainer = document.getElementById('playerContainer');
+  var notLive = document.getElementById('notLive');
+
+  function showPlayer(){
+    if (playerContainer){ playerContainer.classList.remove('is-hidden'); playerContainer.setAttribute('aria-hidden','false'); }
+    if (notLive){ notLive.classList.add('is-hidden'); }
+  }
+  function showFallback(){
+    if (playerContainer){ playerContainer.classList.add('is-hidden'); playerContainer.setAttribute('aria-hidden','true'); }
+    if (notLive){ notLive.classList.remove('is-hidden'); }
+  }
+  function clearTimers(){
+    if (pollTimer){ clearInterval(pollTimer); pollTimer = null; }
+    if (startTimer){ clearTimeout(startTimer); startTimer = null; }
+  }
+  function safeState(){
+    try { return player.getPlayerState(); } catch(e){ return -1; }
+  }
+
+  window.onYouTubeIframeAPIReady = function(){
+    player = new YT.Player('yt-live-player', {
+      width: '100%',
+      height: '100%',
+      playerVars: { autoplay: 1, rel: 0, modestbranding: 1 },
+      events: { onReady: tryLiveOnce, onStateChange: onStateChange, onError: onError }
+    });
+  };
+
+  function tryLiveOnce(){
+    liveShown = false;
+    showFallback();     // keep fallback visible until confirmed live
+    clearTimers();
+
+    try {
+      player.loadVideoById('live_stream'); // official target for current live
+    } catch(e){
+      startPolling();
+      return;
+    }
+
+    startTimer = setTimeout(function(){
+      var s = safeState();
+      // only show if actually playing/buffering
+      if (s === 1 || s === 3){
+        liveShown = true;
+        showPlayer();
+        clearTimers();
+      } else {
+        showFallback();
+        startPolling();
+      }
+    }, START_GRACE_MS);
+  }
+
+  function onStateChange(evt){
+    var s = evt && typeof evt.data === 'number' ? evt.data : -1;
+    if ((s === 1 || s === 3) && !liveShown){
+      liveShown = true;
+      showPlayer();
+      clearTimers(); // stop polling while live
+    }
+    if (s === 0 && !liveShown){
+      // ended right away while probing → fallback
+      showFallback();
+      startPolling();
+    }
+  }
+
+  function onError(){
+    if (!liveShown){
+      showFallback();
+      startPolling();
+    }
+  }
+
+  function startPolling(){
+    clearTimers();
+    showFallback();
+    pollTimer = setInterval(function(){
+      try {
+        player.loadVideoById('live_stream');
+      } catch(e){ /* try again next tick */ }
+      startTimer = setTimeout(function(){
+        var s = safeState();
+        if (s === 1 || s === 3){
+          liveShown = true;
+          showPlayer();
+          clearTimers();
+        } else {
+          showFallback();
+        }
+      }, START_GRACE_MS);
+    }, POLL_MS);
+  }
+})();
+</script>
