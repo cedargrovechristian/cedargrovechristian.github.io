@@ -1,0 +1,58 @@
+---
+layout: default
+
+---
+<div class="container py-5 sermon">
+  <header class="mb-3">
+    <h1 class="h2 mb-1">{{ page.title }}</h1>
+    <p class="text-muted mb-0">
+      <strong>{{ page.speaker }}</strong> ·
+      {{ page.date | date: "%B %-d, %Y" }} ·
+      {{ page.passage }}
+    </p>
+  </header>
+
+  {% if page.youtube_id %}
+  <div class="ratio ratio-16x9 mb-4">
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/{{ page.youtube_id }}"
+      title="{{ page.title | escape }}"
+      frameborder="0"
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
+  </div>
+  {% endif %}
+
+  {% if page.summary %}
+    <p class="lead">{{ page.summary }}</p>
+  {% endif %}
+
+  <div class="sermon-content">
+    {{ content }}
+  </div>
+</div>
+
+{%- comment -%} Structured data for the video (if present) {%- endcomment -%}
+{% if page.youtube_id %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "{{ page.title | escape }}",
+  "description": "{{ page.summary | default: site.description | strip_newlines | escape }}",
+  "uploadDate": "{{ page.date | date_to_xmlschema }}",
+  "thumbnailUrl": ["https://i.ytimg.com/vi/{{ page.youtube_id }}/hqdefault.jpg"],
+  "embedUrl": "https://www.youtube-nocookie.com/embed/{{ page.youtube_id }}",
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.title | escape }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.logo | default: '/assets/images/logo.png' | relative_url }}"
+    }
+  }
+}
+</script>
+{% endif %}
