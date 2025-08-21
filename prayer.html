@@ -1,0 +1,101 @@
+---
+layout: default
+title: Prayer Request
+permalink: /prayer/
+styles:
+  - /assets/css/prayer.css
+---
+
+<div class="container py-5">
+  <div class="text-center mb-4">
+    <h1 class="display-5 fw-bold">Prayer Request</h1>
+    <p class="lead mb-0">Let us know how we can pray for you. Your request goes directly to our pastor.</p>
+  </div>
+
+  <form id="prayerForm" class="mx-auto" style="max-width:720px;">
+    <!-- Honeypot (anti-spam) -->
+    <div style="position:absolute; left:-9999px; top:auto;">
+      <label>Leave this empty <input type="text" name="honeypot" tabindex="-1" autocomplete="off"></label>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Name (optional)</label>
+        <input type="text" class="form-control" name="name" autocomplete="name">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Email (optional)</label>
+        <input type="email" class="form-control" name="email" autocomplete="email">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Phone (optional)</label>
+        <input type="tel" class="form-control" name="phone" autocomplete="tel">
+      </div>
+      <div class="col-12">
+        <label class="form-label">Your Prayer Request *</label>
+        <textarea class="form-control" name="request" rows="5" required
+          placeholder="Share as much or as little as you’d like."></textarea>
+      </div>
+
+      <div class="col-12">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="sharePublicly" id="sharePublicly">
+          <label class="form-check-label" for="sharePublicly">
+            You may share this with the congregation (e.g., bulletin or prayer list).
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="contactRequested" id="contactRequested">
+          <label class="form-check-label" for="contactRequested">
+            Please have someone follow up with me.
+          </label>
+        </div>
+      </div>
+
+      <div class="col-12 d-grid d-sm-flex gap-2">
+        <button type="submit" class="btn btn-outline-nature" id="submitBtn">Send Request</button>
+        <button type="reset" class="btn btn-outline-nature-reverse">Clear</button>
+      </div>
+    </div>
+
+    <!-- Status messages -->
+    <div id="formAlert" class="alert mt-4 d-none" role="alert"></div>
+  </form>
+</div>
+
+<script>
+(function(){
+  // Your live Apps Script endpoint:
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxSF0t5SqS0sxN9OdJ-KEcghCfSrfFycA4Mpg2eGdwwKiN-1RhioPvFhwxeXfrtAXWD/exec';
+
+  const form = document.getElementById('prayerForm');
+  const alertBox = document.getElementById('formAlert');
+  const submitBtn = document.getElementById('submitBtn');
+
+  function showAlert(type, msg){
+    alertBox.className = 'alert mt-4 alert-' + type; // success | danger | warning
+    alertBox.textContent = msg;
+    alertBox.classList.remove('d-none');
+  }
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    alertBox.classList.add('d-none');
+    submitBtn.disabled = true;
+
+    const data = new FormData(form);
+
+    try {
+      // no-cors keeps this simple for static sites; submission still reaches Apps Script
+      await fetch(SCRIPT_URL, { method: 'POST', body: data, mode: 'no-cors' });
+      form.reset();
+      showAlert('success', 'Thank you! Your prayer request has been received.');
+    } catch (err) {
+      console.error(err);
+      showAlert('danger', 'Sorry—something went wrong sending your request. Please try again later.');
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+})();
+</script>
