@@ -34,10 +34,11 @@ youtube: "https://www.youtube.com/@CedarGroveChristian"
 
 collections:
   sermons:
-    output: true
+    output: false
     permalink: /sermons/:slug/
 
 # Optional: default layout for all sermons
 defaults:
   - scope: { path: "", type: sermons }
+
     values: { layout: sermon }
