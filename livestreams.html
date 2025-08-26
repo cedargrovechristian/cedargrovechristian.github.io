@@ -46,12 +46,17 @@ archive_url: "/archivedSermons/"
     console.error('Missing/invalid YouTube channel_id.');
   }
 
-  var POLL_MS = 30000;     // check every 30s
+  var POLL_MS = 30000;       // check every 30s
   var START_GRACE_MS = 4000; // give live a moment to start
   var player = null, pollTimer = null, startTimer = null, liveShown = false;
 
   var playerContainer = document.getElementById('playerContainer');
   var notLive = document.getElementById('notLive');
+
+  // Build the proper live embed URL for your channel
+  var liveUrl = 'https://www.youtube.com/embed/live_stream?channel='
+                + encodeURIComponent(channelId)
+                + '&autoplay=1&rel=0&modestbranding=1';
 
   function showPlayer(){
     if (playerContainer){ playerContainer.classList.remove('is-hidden'); playerContainer.setAttribute('aria-hidden','false'); }
@@ -73,18 +78,19 @@ archive_url: "/archivedSermons/"
     player = new YT.Player('yt-live-player', {
       width: '100%',
       height: '100%',
-      playerVars: { autoplay: 1, rel: 0, modestbranding: 1 },
+      playerVars: { autoplay: 1, rel: 0, modestbranding: 1, playsinline: 1 },
       events: { onReady: tryLiveOnce, onStateChange: onStateChange, onError: onError }
     });
   };
 
   function tryLiveOnce(){
     liveShown = false;
-    showFallback();     // keep fallback visible until confirmed live
+    showFallback();
     clearTimers();
 
+    // ✅ Load the proper live_stream URL instead of a fake videoId
     try {
-      player.loadVideoById('live_stream'); // official target for current live
+      player.loadVideoByUrl(liveUrl);
     } catch(e){
       startPolling();
       return;
@@ -92,8 +98,7 @@ archive_url: "/archivedSermons/"
 
     startTimer = setTimeout(function(){
       var s = safeState();
-      // only show if actually playing/buffering
-      if (s === 1 || s === 3){
+      if (s === 1 || s === 3){ // playing or buffering
         liveShown = true;
         showPlayer();
         clearTimers();
@@ -109,7 +114,7 @@ archive_url: "/archivedSermons/"
     if ((s === 1 || s === 3) && !liveShown){
       liveShown = true;
       showPlayer();
-      clearTimers(); // stop polling while live
+      clearTimers();
     }
     if (s === 0 && !liveShown){
       // ended right away while probing → fallback
@@ -130,7 +135,8 @@ archive_url: "/archivedSermons/"
     showFallback();
     pollTimer = setInterval(function(){
       try {
-        player.loadVideoById('live_stream');
+        // keep probing the live URL
+        player.loadVideoByUrl(liveUrl);
       } catch(e){ /* try again next tick */ }
       startTimer = setTimeout(function(){
         var s = safeState();
