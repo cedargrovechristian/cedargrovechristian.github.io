@@ -10,7 +10,7 @@ archive_url: "/archivedSermons/"
 <div class="container py-5">
   <div class="text-center mb-4">
     <h1 class="display-5 fw-bold">Livestream</h1>
-    <p class="lead mb-0">If we’re live, it will play here. Otherwise please check out our <a href="/archivedSermons/" id="sermonLink">sermons page.</a></p>
+    <p class="lead mb-0">If we’re live, it will play here. Otherwise please check out our sermons on <a href="https://www.youtube.com/@CedarGroveChristian" id="sermonLink">Youtube</a>.</p>
   </div>
 
 <div class="container" style="max-width: 900px; margin: 0 auto;">
@@ -26,13 +26,13 @@ archive_url: "/archivedSermons/"
 </div>
   </div>
 
-  <!-- Fallback shown by default -->
+  <!-- Fallback shown by default 
   <div id="notLive" class="text-center mt-4">
     <p class="lead mb-3">We are not live at the moment.</p>
     <a class="btn btn-outline-secondary" href="{{ page.archive_url | default: site.archive_url | default: '/sermons/' | relative_url }}">
       View previous sermons
     </a>
-  </div>
+  </div-->
 </div>
 
 <style>
@@ -158,5 +158,6 @@ archive_url: "/archivedSermons/"
   }
 })();
 </script>
+
 
 
