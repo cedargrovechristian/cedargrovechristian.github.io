@@ -41,7 +41,7 @@
   {% if upcoming.size > 0 %}
     <div class="d-flex flex-wrap justify-content-center gap-4">
       {% for event in upcoming %}
-        <div class="card shadow-sm" style="max-width: 320px; color:#2e7d32;">
+        <div class="card shadow-sm" style="max-width: 200px; color:#2e7d32;">
           {% if event.image %}
              <div class="event-image">
             <img src="{{ event.image | relative_url }}" 
@@ -64,6 +64,7 @@
     <p class="mt-4 fw-bold">No special events scheduled right now — but we’d love to see you at our regular services above!</p>
   {% endif %}
 </div>
+
 
 
 
