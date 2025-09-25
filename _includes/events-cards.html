@@ -43,10 +43,12 @@
       {% for event in upcoming %}
         <div class="card shadow-sm" style="max-width: 320px; color:#2e7d32;">
           {% if event.image %}
+             <div class="event-image">
             <img src="{{ event.image | relative_url }}" 
                  class="card-img-top event-img" 
                  alt="{{ event.title }}" 
                  style="object-fit:cover; height:200px;">
+             </div>
           {% endif %}
           <div class="card-body text-center">
             <p class="card-text text-danger">
@@ -62,3 +64,4 @@
     <p class="mt-4 fw-bold">No special events scheduled right now — but we’d love to see you at our regular services above!</p>
   {% endif %}
 </div>
+
