@@ -52,7 +52,7 @@
           {% endif %}
           <div class="card-body text-center">
             <p class="card-text text-danger">
-              <small>{{ event.date | date: "%B %e, %Y · %l:%M %p" }}</small>
+              <small>{{ event.date | date: "%B %e, %Y ·<br> %l:%M %p" }}</small>
             </p>
             <h5 class="card-title">{{ event.title }}</h5>
             <p class="card-text">{{ event.description }}</p>
@@ -64,6 +64,7 @@
     <p class="mt-4 fw-bold">No special events scheduled right now — but we’d love to see you at our regular services above!</p>
   {% endif %}
 </div>
+
 
 
 
