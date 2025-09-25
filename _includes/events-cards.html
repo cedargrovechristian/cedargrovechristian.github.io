@@ -47,7 +47,7 @@
             <img src="{{ event.image | relative_url }}" 
                  class="card-img-top event-img" 
                  alt="{{ event.title }}" 
-                 style="object-fit:contain; max-height:320px; width:100%;">
+                 style="object-fit:cover; max-height:320px; width:100%;">
              </div>
           {% endif %}
           <div class="card-body text-center">
@@ -64,6 +64,7 @@
     <p class="mt-4 fw-bold">No special events scheduled right now — but we’d love to see you at our regular services above!</p>
   {% endif %}
 </div>
+
 
 
 
