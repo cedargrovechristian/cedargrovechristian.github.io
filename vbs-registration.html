@@ -1,0 +1,239 @@
+---
+layout: default
+title: Vacation Bible School Registration
+permalink: /vbs-registration/
+styles:
+  - /assets/css/vbs-registration.css
+scripts:
+  - /assets/js/vbs-registration.js
+---
+
+<!-- After you deploy the Cloudflare/Microsoft endpoint, uncomment this and add the real URL.
+<script>window.CG_VBS_ENDPOINT = "https://your-worker-url.workers.dev";</script>
+-->
+
+<main class="vbs-page">
+  <section class="vbs-hero">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <p class="vbs-kicker">Cedar Grove Christian</p>
+          <h1>Vacation Bible School Registration</h1>
+          <p class="lead mb-0">Please complete this form for each person who plans to attend Vacation Bible School July 13-17, 2026 from 6:00pm - 8:45pm nightly.</p>
+        </div>
+        <div class="col-lg-4">
+          <div class="vbs-date-card">
+            <span class="date-label">VBS Week</span>
+            <strong>July 13-17, 2026</strong>
+            <span>6:00pm - 8:45pm nightly</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="vbs-form-section">
+    <div class="container">
+      <div class="vbs-form-shell">
+        <div class="vbs-form-intro">
+          <h2>Register for VBS</h2>
+          <p>Fields marked with <span aria-hidden="true">*</span> are required. Please submit a separate registration for each child or attendee.</p>
+        </div>
+
+        <div id="vbsFormAlert" class="vbs-alert" role="status" aria-live="polite" hidden></div>
+
+        <form id="vbsRegistrationForm" class="vbs-form" method="post" novalidate>
+          <input type="text" name="website" id="website" class="vbs-hidden-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <fieldset>
+            <legend>Attendee Information</legend>
+            <div class="row g-3">
+              <div class="col-md-12">
+                <label for="childName" class="form-label">Child's Name <span>*</span></label>
+                <input type="text" class="form-control" id="childName" name="childName" autocomplete="name" required>
+              </div>
+              <div class="col-md-12">
+                <label for="address" class="form-label">Address <span>*</span></label>
+                <input type="text" class="form-control" id="address" name="address" autocomplete="street-address" required>
+              </div>
+              <div class="col-md-5">
+                <label for="city" class="form-label">City <span>*</span></label>
+                <input type="text" class="form-control" id="city" name="city" autocomplete="address-level2" required>
+              </div>
+              <div class="col-md-3">
+                <label for="state" class="form-label">State <span>*</span></label>
+                <input type="text" class="form-control" id="state" name="state" autocomplete="address-level1" maxlength="2" required>
+              </div>
+              <div class="col-md-4">
+                <label for="zipCode" class="form-label">Zip Code <span>*</span></label>
+                <input type="text" class="form-control" id="zipCode" name="zipCode" autocomplete="postal-code" inputmode="numeric" required>
+              </div>
+              <div class="col-md-6">
+                <label for="gender" class="form-label">Child's Gender <span>*</span></label>
+                <select class="form-select" id="gender" name="gender" required>
+                  <option value="">Select one</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="dateOfBirth" class="form-label">Child's Date of Birth <span>*</span></label>
+                <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" required>
+              </div>
+              <div class="col-md-6">
+                <label for="ageGroup" class="form-label">Child's Age Group <span>*</span></label>
+                <select class="form-select" id="ageGroup" name="ageGroup" required>
+                  <option value="">Select one</option>
+                  <option>Toddlers (0-4)</option>
+                  <option>Kindergarten - 2nd Grade</option>
+                  <option>3rd - 5th Grade</option>
+                  <option>6th - 12th Grade</option>
+                  <option>Adult</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="shirtSize" class="form-label">Child's T-Shirt Size <span>*</span></label>
+                <select class="form-select" id="shirtSize" name="shirtSize" required>
+                  <option value="">Select one</option>
+                  <option>Youth Small</option>
+                  <option>Youth Medium</option>
+                  <option>Youth Large</option>
+                  <option>Youth X-Large</option>
+                  <option>Small</option>
+                  <option>Medium</option>
+                  <option>Large</option>
+                  <option>X-Large</option>
+                  <option>2X-Large</option>
+                  <option>3X-Large</option>
+                  <option>4X-Large</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Allergies & Medical Notes</legend>
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label for="foodAllergies" class="form-label">Food Allergies</label>
+                <textarea class="form-control" id="foodAllergies" name="foodAllergies" rows="3"></textarea>
+              </div>
+              <div class="col-md-4">
+                <label for="environmentalAllergies" class="form-label">Environmental Allergies</label>
+                <textarea class="form-control" id="environmentalAllergies" name="environmentalAllergies" rows="3"></textarea>
+              </div>
+              <div class="col-md-4">
+                <label for="medicalConcerns" class="form-label">Medical Concerns</label>
+                <textarea class="form-control" id="medicalConcerns" name="medicalConcerns" rows="3"></textarea>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Parent / Guardian Information</legend>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="guardianFirstName" class="form-label">Parent/Guardian First Name <span>*</span></label>
+                <input type="text" class="form-control" id="guardianFirstName" name="guardianFirstName" autocomplete="given-name" required>
+              </div>
+              <div class="col-md-6">
+                <label for="guardianLastName" class="form-label">Parent/Guardian Last Name <span>*</span></label>
+                <input type="text" class="form-control" id="guardianLastName" name="guardianLastName" autocomplete="family-name" required>
+              </div>
+              <div class="col-md-6">
+                <label for="guardianEmail" class="form-label">Parent/Guardian Email <span>*</span></label>
+                <input type="email" class="form-control" id="guardianEmail" name="guardianEmail" autocomplete="email" required>
+              </div>
+              <div class="col-md-6">
+                <label for="primaryPhone" class="form-label">Primary Telephone Number <span>*</span></label>
+                <input type="tel" class="form-control" id="primaryPhone" name="primaryPhone" autocomplete="tel" required>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Photo / Video Permission</legend>
+            <p class="fieldset-help">During VBS we may take photos/videos for ministry updates, church promotion, and future events. We respect family privacy needs. Please indicate your permission below.</p>
+            <div class="vbs-radio-card-group">
+              <label class="vbs-radio-card">
+                <input type="radio" name="photoPermission" value="Yes, full permission to use my child's photo/video publicly" required>
+                <span>Yes, full permission to use my child’s photo/video publicly</span>
+              </label>
+              <label class="vbs-radio-card">
+                <input type="radio" name="photoPermission" value="Limited permission">
+                <span>Limited permission</span>
+              </label>
+              <label class="vbs-radio-card">
+                <input type="radio" name="photoPermission" value="No public use online or printed materials">
+                <span>No public use online or printed materials</span>
+              </label>
+            </div>
+            <div class="mt-3" id="limitedPermissionWrap">
+              <label for="limitedPhotoRequests" class="form-label">Limited Photo / Video Permission Requests</label>
+              <textarea class="form-control" id="limitedPhotoRequests" name="limitedPhotoRequests" rows="3" placeholder="Example: group photos only, no close-ups, no social media, etc."></textarea>
+            </div>
+            <div class="form-check vbs-certify">
+              <input class="form-check-input" type="checkbox" value="Yes" id="guardianCertification" name="guardianCertification" required>
+              <label class="form-check-label" for="guardianCertification">I certify I am the parent/legal guardian and authorized to make decisions for this child. <span>*</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Emergency Contact</legend>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="emergencyContact" class="form-label">Emergency Contact Person <span>*</span></label>
+                <input type="text" class="form-control" id="emergencyContact" name="emergencyContact" required>
+              </div>
+              <div class="col-md-6">
+                <label for="emergencyPhone" class="form-label">Emergency Contact Phone Number <span>*</span></label>
+                <input type="tel" class="form-control" id="emergencyPhone" name="emergencyPhone" autocomplete="tel" required>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Church & Follow-Up</legend>
+            <div class="row g-4">
+              <div class="col-lg-6">
+                <label class="form-label">Do you and your family have a home church? <span>*</span></label>
+                <div class="vbs-inline-options">
+                  <label><input type="radio" name="homeChurch" value="Yes" required> Yes</label>
+                  <label><input type="radio" name="homeChurch" value="No"> No</label>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <label class="form-label">May we occasionally send special mailings such as birthday cards, holiday greetings, and invitations to future children’s events? <span>*</span></label>
+                <div class="vbs-inline-options stacked">
+                  <label><input type="radio" name="mailingPermission" value="Yes, I give permission" required> Yes, I give permission</label>
+                  <label><input type="radio" name="mailingPermission" value="No, I do not give permission"> No, I do not give permission</label>
+                </div>
+              </div>
+              <div class="col-12">
+                <label class="form-label">How did you hear about our VBS? Check all that apply. <span>*</span></label>
+                <div class="vbs-checkbox-grid">
+                  <label><input type="checkbox" name="heardAbout" value="Flyer"> Flyer</label>
+                  <label><input type="checkbox" name="heardAbout" value="VBS Business Card"> VBS Business Card</label>
+                  <label><input type="checkbox" name="heardAbout" value="Poster"> Poster</label>
+                  <label><input type="checkbox" name="heardAbout" value="Banner/Yard Sign"> Banner/Yard Sign</label>
+                  <label><input type="checkbox" name="heardAbout" value="Social Media"> Social Media</label>
+                  <label><input type="checkbox" name="heardAbout" value="Personal Invitation"> Personal Invitation</label>
+                  <label><input type="checkbox" name="heardAbout" value="Other"> Other</label>
+                </div>
+                <div class="mt-3">
+                  <label for="heardAboutOther" class="form-label">Other details</label>
+                  <input type="text" class="form-control" id="heardAboutOther" name="heardAboutOther">
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="vbs-submit-row">
+            <button type="submit" class="btn btn-outline-nature btn-lg" id="vbsSubmitButton">Submit Registration</button>
+            <p class="vbs-submit-note">After submitting, someone from Cedar Grove Christian may contact you if we need clarification.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
