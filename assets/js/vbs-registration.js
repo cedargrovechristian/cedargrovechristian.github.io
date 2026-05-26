@@ -24,10 +24,25 @@
   function toggleLimitedPhotoRequired(form) {
     const limited = getRadioValue(form, "photoPermission") === "Limited permission";
     const limitedTextarea = document.getElementById("limitedPhotoRequests");
-    if (!limitedTextarea) return;
+    const limitedWrap = document.getElementById("limitedPermissionWrap");
+    if (!limitedTextarea || !limitedWrap) return;
+
     limitedTextarea.required = limited;
-    limitedTextarea.closest("#limitedPermissionWrap").style.display = limited ? "block" : "none";
+    limitedWrap.hidden = !limited;
+
     if (!limited) limitedTextarea.value = "";
+  }
+
+  function toggleHeardAboutOtherRequired(form) {
+    const otherSelected = getCheckedValues(form, "heardAbout").includes("Other");
+    const otherInput = document.getElementById("heardAboutOther");
+    const otherWrap = document.getElementById("heardAboutOtherWrap");
+    if (!otherInput || !otherWrap) return;
+
+    otherInput.required = otherSelected;
+    otherWrap.hidden = !otherSelected;
+
+    if (!otherSelected) otherInput.value = "";
   }
 
   function buildPayload(form) {
@@ -74,6 +89,11 @@
       input.addEventListener("change", () => toggleLimitedPhotoRequired(form));
     });
 
+    toggleHeardAboutOtherRequired(form);
+    form.querySelectorAll('input[name="heardAbout"]').forEach((input) => {
+      input.addEventListener("change", () => toggleHeardAboutOtherRequired(form));
+    });
+
     form.addEventListener("submit", async function (event) {
       event.preventDefault();
 
@@ -112,6 +132,7 @@
         form.reset();
         form.classList.remove("was-validated");
         toggleLimitedPhotoRequired(form);
+        toggleHeardAboutOtherRequired(form);
         showAlert("Thank you. Your VBS registration has been submitted.", "success");
       } catch (error) {
         showAlert("Something went wrong and the registration was not submitted. Please try again or contact Cedar Grove Christian.", "error");
