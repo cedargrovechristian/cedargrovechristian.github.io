@@ -118,7 +118,7 @@ scripts:
                 <textarea class="form-control" id="environmentalAllergies" name="environmentalAllergies" rows="3"></textarea>
               </div>
               <div class="col-md-4">
-                <label for="medicalConcerns" class="form-label">Medical Concerns</label>
+                <label for="medicalConcerns" class="form-label">Medical Concerns / Medications / Emergency Notes</label>
                 <textarea class="form-control" id="medicalConcerns" name="medicalConcerns" rows="3"></textarea>
               </div>
               <div class="col-md-12">
@@ -171,8 +171,8 @@ scripts:
                 <span>No public use online or printed materials</span>
               </label>
             </div>
-            <div class="mt-3" id="limitedPermissionWrap">
-              <label for="limitedPhotoRequests" class="form-label">Limited Photo / Video Permission Requests</label>
+            <div class="mt-3" id="limitedPermissionWrap" hidden>
+              <label for="limitedPhotoRequests" class="form-label">Limited Photo / Video Permission Requests <span class="limited-required-star">*</span></label>
               <textarea class="form-control" id="limitedPhotoRequests" name="limitedPhotoRequests" rows="3" placeholder="Example: group photos only, no close-ups, no social media, etc."></textarea>
             </div>
             <div class="form-check vbs-certify">
@@ -223,9 +223,9 @@ scripts:
                   <label><input type="checkbox" name="heardAbout" value="Personal Invitation"> Personal Invitation</label>
                   <label><input type="checkbox" name="heardAbout" value="Other"> Other</label>
                 </div>
-                <div class="mt-3">
-                  <label for="heardAboutOther" class="form-label">Other details</label>
-                  <input type="text" class="form-control" id="heardAboutOther" name="heardAboutOther">
+                <div class="mt-3" id="heardAboutOtherWrap" hidden>
+                  <label for="heardAboutOther" class="form-label">Other details <span>*</span></label>
+                  <input type="text" class="form-control" id="heardAboutOther" name="heardAboutOther" placeholder="Please tell us how you heard about VBS">
                 </div>
               </div>
             </div>
