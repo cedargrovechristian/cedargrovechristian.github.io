@@ -46,6 +46,8 @@ The included JavaScript checks this endpoint when the user submits the form, so 
 - FoodAllergies
 - EnvironmentalAllergies
 - MedicalConcerns
+- SpecialNeedsInfo
+- SupportIfNeeded
 - GuardianFirstName
 - GuardianLastName
 - GuardianEmail
@@ -61,3 +63,10 @@ The included JavaScript checks this endpoint when the user submits the form, so 
 - HeardAboutOther
 
 SharePoint internal column names can be picky. Create the columns with these exact names before renaming their display labels.
+
+Recommended display labels for the new care/support columns:
+
+- `SpecialNeedsInfo` → `Special Needs, Accommodations, or Helpful Information`
+- `SupportIfNeeded` → `Best way to support this child if needed`
+
+Use **Multiple lines of text** for both of these columns.
