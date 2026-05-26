@@ -46,6 +46,8 @@
       foodAllergies: formData.get("foodAllergies") || "",
       environmentalAllergies: formData.get("environmentalAllergies") || "",
       medicalConcerns: formData.get("medicalConcerns") || "",
+      specialNeedsInfo: formData.get("specialNeedsInfo") || "",
+      supportIfNeeded: formData.get("supportIfNeeded") || "",
       guardianFirstName: formData.get("guardianFirstName") || "",
       guardianLastName: formData.get("guardianLastName") || "",
       guardianEmail: formData.get("guardianEmail") || "",
