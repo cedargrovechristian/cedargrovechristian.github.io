@@ -4,59 +4,49 @@
 }
 
 .vbs-hero {
-  background:
-    linear-gradient(120deg, rgba(47, 82, 51, 0.92), rgba(47, 82, 51, 0.74)),
-    url('/assets/images/church.webp') center/cover no-repeat;
+  background: #0b4f8a;
   color: #fff;
-  padding: clamp(3.5rem, 8vw, 6rem) 0;
+  padding: 0 0 clamp(1.75rem, 4vw, 3rem);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .12);
+}
+
+.vbs-hero-banner {
+  width: 100%;
+  background: #0b4f8a;
+  overflow: hidden;
+}
+
+.vbs-hero-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.vbs-hero-info {
+  max-width: 980px;
+  margin: clamp(1.25rem, 3vw, 2rem) auto 0;
+  text-align: center;
 }
 
 .vbs-kicker {
-  color: #D9A441;
+  color: #ffe08a;
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
-  margin-bottom: .75rem;
+  margin-bottom: .5rem;
 }
 
 .vbs-hero h1 {
-  font-size: clamp(2.5rem, 6vw, 4.75rem);
-  line-height: .96;
-  margin-bottom: 1rem;
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  line-height: 1;
+  margin-bottom: .75rem;
 }
 
 .vbs-hero .lead {
-  max-width: 800px;
-  font-size: clamp(1.05rem, 2vw, 1.3rem);
-}
-
-.vbs-date-card {
-  background: rgba(255, 253, 231, .96);
-  color: #2F5233;
-  border: 1px solid rgba(217, 164, 65, .45);
-  border-radius: 1.5rem;
-  padding: 1.5rem;
-  box-shadow: 0 18px 45px rgba(0, 0, 0, .22);
-}
-
-.vbs-date-card .date-label,
-.vbs-date-card span:last-child {
-  display: block;
-}
-
-.vbs-date-card .date-label {
-  color: #8a5d10;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  font-size: .8rem;
-}
-
-.vbs-date-card strong {
-  display: block;
-  font-family: Playfair Display, Georgia, serif;
-  font-size: 1.9rem;
-  margin: .35rem 0;
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: clamp(1.02rem, 2vw, 1.25rem);
 }
 
 .vbs-form-section {
@@ -131,242 +121,6 @@
   border-left: 4px solid #D9A441;
   border-radius: .75rem;
   padding: .85rem 1rem;
-}
-
-.vbs-form .form-control,
-.vbs-form .form-select {
-  border-radius: .9rem;
-  border-color: rgba(47, 82, 51, .25);
-  padding: .8rem .95rem;
-}
-
-.vbs-form .form-control:focus,
-.vbs-form .form-select:focus {
-  border-color: #D9A441;
-  box-shadow: 0 0 0 .25rem rgba(217, 164, 65, .25);
-}
-
-.vbs-radio-card-group {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-.vbs-radio-card,
-.vbs-checkbox-grid label,
-.vbs-inline-options label {
-  border: 1px solid rgba(47, 82, 51, .18);
-  border-radius: 1rem;
-  background: #fbfaf4;
-  padding: .9rem 1rem;
-  display: flex;
-  gap: .65rem;
-  align-items: flex-start;
-  cursor: pointer;
-}
-
-.vbs-radio-card:hover,
-.vbs-checkbox-grid label:hover,
-.vbs-inline-options label:hover {
-  border-color: rgba(217, 164, 65, .9);
-  background: #fffde7;
-}
-
-.vbs-inline-options {
-  display: flex;
-  gap: .75rem;
-  flex-wrap: wrap;
-}
-
-.vbs-inline-options.stacked {
-  flex-direction: column;
-}
-
-.vbs-checkbox-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: .75rem;
-}
-
-.vbs-certify {
-  margin-top: 1.5rem;
-  background: #f7f4ea;
-  border: 1px solid rgba(47, 82, 51, .12);
-  border-radius: 1rem;
-  padding: 1rem 1rem 1rem 2.8rem;
-}
-
-.vbs-submit-row {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  padding-top: 1rem;
-}
-
-.vbs-submit-note {
-  margin: 0;
-  color: #59695c;
-  max-width: 560px;
-}
-
-.vbs-alert {
-  margin: 1.5rem clamp(1.5rem, 4vw, 2.5rem) 0;
-  border-radius: 1rem;
-  padding: 1rem 1.25rem;
-  font-weight: 600;
-}
-
-.vbs-alert.success {
-  background: #e8f5e9;
-  color: #1f5c28;
-  border: 1px solid #a5d6a7;
-}
-
-.vbs-alert.error {
-  background: #fff3e0;
-  color: #8a4b00;
-  border: 1px solid #ffcc80;
-}
-
-.vbs-hidden-field {
-  position: absolute;
-  left: -9999px;
-  opacity: 0;
-}
-
-@media (max-width: 900px) {
-  .vbs-radio-card-group,
-  .vbs-checkbox-grid {
-    grid-template-columns: 1fr;
-  }
-}
-.vbs-page {
-  background: #f7f4ea;
-  color: #243727;
-}
-
-.vbs-hero {
-  background:
-    linear-gradient(120deg, rgba(47, 82, 51, 0.92), rgba(47, 82, 51, 0.74)),
-    url('/assets/images/church.webp') center/cover no-repeat;
-  color: #fff;
-  padding: clamp(3.5rem, 8vw, 6rem) 0;
-}
-
-.vbs-kicker {
-  color: #D9A441;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  margin-bottom: .75rem;
-}
-
-.vbs-hero h1 {
-  font-size: clamp(2.5rem, 6vw, 4.75rem);
-  line-height: .96;
-  margin-bottom: 1rem;
-}
-
-.vbs-hero .lead {
-  max-width: 800px;
-  font-size: clamp(1.05rem, 2vw, 1.3rem);
-}
-
-.vbs-date-card {
-  background: rgba(255, 253, 231, .96);
-  color: #2F5233;
-  border: 1px solid rgba(217, 164, 65, .45);
-  border-radius: 1.5rem;
-  padding: 1.5rem;
-  box-shadow: 0 18px 45px rgba(0, 0, 0, .22);
-}
-
-.vbs-date-card .date-label,
-.vbs-date-card span:last-child {
-  display: block;
-}
-
-.vbs-date-card .date-label {
-  color: #8a5d10;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  font-size: .8rem;
-}
-
-.vbs-date-card strong {
-  display: block;
-  font-family: Playfair Display, Georgia, serif;
-  font-size: 1.9rem;
-  margin: .35rem 0;
-}
-
-.vbs-form-section {
-  padding: clamp(2.5rem, 6vw, 5rem) 0;
-}
-
-.vbs-form-shell {
-  max-width: 1040px;
-  margin: 0 auto;
-  background: #fff;
-  border-radius: 1.5rem;
-  border: 1px solid rgba(47, 82, 51, .12);
-  box-shadow: 0 20px 60px rgba(47, 82, 51, .12);
-  overflow: hidden;
-}
-
-.vbs-form-intro {
-  background: #fffde7;
-  padding: clamp(1.5rem, 4vw, 2.5rem);
-  border-bottom: 1px solid rgba(47, 82, 51, .12);
-}
-
-.vbs-form-intro h2 {
-  color: #2F5233;
-  margin-bottom: .5rem;
-}
-
-.vbs-form-intro p {
-  margin-bottom: 0;
-  color: #4d5b4f;
-}
-
-.vbs-form-intro span,
-.form-label span,
-.vbs-certify span {
-  color: #a2351d;
-  font-weight: 700;
-}
-
-.vbs-form {
-  padding: clamp(1.5rem, 4vw, 2.5rem);
-}
-
-.vbs-form fieldset {
-  border: 0;
-  padding: 0 0 2rem;
-  margin: 0 0 2rem;
-  border-bottom: 1px solid rgba(47, 82, 51, .12);
-}
-
-.vbs-form fieldset:last-of-type {
-  border-bottom: 0;
-  margin-bottom: 0;
-}
-
-.vbs-form legend {
-  float: none;
-  width: auto;
-  font-family: Playfair Display, Georgia, serif;
-  font-size: 1.65rem;
-  color: #2F5233;
-  margin-bottom: 1rem;
-}
-
-.fieldset-help {
-  color: #4d5b4f;
-  max-width: 760px;
 }
 
 .vbs-form .form-control,
