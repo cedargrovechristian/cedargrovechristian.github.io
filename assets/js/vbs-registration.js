@@ -1,7 +1,8 @@
 (function () {
+  
   function getVbsEndpoint() {
-    return window.CG_VBS_ENDPOINT || document.querySelector('meta[name="cg-vbs-endpoint"]')?.content || "";
-  }
+  return "https://cedar-grove-vbs-registration.cedargrovechristiantn.workers.dev";
+}
 
   function getCheckedValues(form, name) {
     return Array.from(form.querySelectorAll(`input[name="${name}"]:checked`)).map((input) => input.value);
@@ -111,6 +112,7 @@
       }
 
       const vbsEndpoint = getVbsEndpoint();
+      
 
       if (!vbsEndpoint) {
         showAlert("This form page is ready, but the submission endpoint has not been connected yet. Add your Cloudflare/Microsoft endpoint URL in vbs-registration.html before going live.", "error");
