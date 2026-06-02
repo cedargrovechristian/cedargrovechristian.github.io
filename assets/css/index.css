@@ -407,3 +407,167 @@ text-decoration: none;
   max-height: 100%;
   object-fit: contain;   /* keeps entire poster visible */
 }
+
+/* Homepage VBS Registration Banner */
+.vbs-home-banner {
+  background:
+    radial-gradient(circle at top left, rgba(217, 164, 65, 0.22), transparent 34%),
+    linear-gradient(135deg, #fff8e8 0%, #f5ead1 42%, #dcedc8 100%);
+  padding: clamp(2rem, 5vw, 4rem) 0;
+  color: #234127;
+}
+
+.vbs-home-card {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.92fr) minmax(320px, 1.08fr);
+  align-items: stretch;
+  overflow: hidden;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(47, 82, 51, 0.14);
+  box-shadow: 0 24px 70px rgba(26, 53, 31, 0.18);
+  position: relative;
+}
+
+.vbs-home-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
+}
+
+.vbs-home-image-wrap {
+  min-height: 330px;
+  background: #2F5233;
+  position: relative;
+  overflow: hidden;
+}
+
+.vbs-home-image {
+  width: 100%;
+  height: 100%;
+  min-height: 330px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transform: scale(1.02);
+}
+
+.vbs-home-image-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(47, 82, 51, 0.08) 0%, rgba(47, 82, 51, 0.14) 100%);
+}
+
+.vbs-home-content {
+  padding: clamp(1.5rem, 4vw, 3.25rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.vbs-home-eyebrow {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .45rem .85rem;
+  border-radius: 999px;
+  background: rgba(217, 164, 65, 0.18);
+  color: #6f4b07;
+  border: 1px solid rgba(217, 164, 65, 0.38);
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.vbs-home-eyebrow::before {
+  content: "";
+  width: .55rem;
+  height: .55rem;
+  border-radius: 50%;
+  background: #D9A441;
+  box-shadow: 0 0 0 5px rgba(217, 164, 65, 0.18);
+}
+
+.vbs-home-content h2 {
+  color: #2F5233;
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 1.02;
+  margin: 0 0 .55rem;
+}
+
+.vbs-home-theme {
+  color: #92640d;
+  font-weight: 800;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  margin-bottom: .7rem;
+}
+
+.vbs-home-details {
+  color: #2F5233;
+  font-weight: 800;
+  font-size: 1.05rem;
+  margin-bottom: .85rem;
+}
+
+.vbs-home-copy {
+  color: #46624a;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  max-width: 58ch;
+  margin-bottom: 1.35rem;
+}
+
+.vbs-home-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .9rem 1rem;
+}
+
+.vbs-home-note {
+  color: #5d6b5f;
+  font-weight: 600;
+}
+
+@media (max-width: 991px) {
+  .vbs-home-card {
+    grid-template-columns: 1fr;
+  }
+
+  .vbs-home-image-wrap,
+  .vbs-home-image {
+    min-height: 260px;
+  }
+}
+
+@media (max-width: 575px) {
+  .vbs-home-banner {
+    padding: 1.25rem 0;
+  }
+
+  .vbs-home-card {
+    border-radius: 20px;
+  }
+
+  .vbs-home-content {
+    padding: 1.35rem;
+  }
+
+  .vbs-home-actions .btn {
+    width: 100%;
+  }
+
+  .vbs-home-note {
+    font-size: .95rem;
+  }
+}
+
